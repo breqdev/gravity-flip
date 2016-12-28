@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html style="height: 100%; width: 100%; position: absolute; overflow: hidden">
+<head>
+<title>Gravity Flip</title>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+}
+</style>
+</head>
+<body style="height: 100%; width: 100%; position: absolute; overflow: hidden">
+<canvas id="canvas" style="position: absolute; overflow: hidden">
+Please update your browser.</canvas>
+<script>
+canvas = document.getElementById("canvas");
+canvas.width = document.body.clientWidth;
+canvas.height = document.body.clientHeight;
+ctx = canvas.getContext("2d");
+
+Platform = function(i){
+	this.x = canvas.width + 100 + Math.random() * canvas.width
+	this.y = Math.random() * canvas.height
+	this.i = i
+}
+
+lives = 10
+
+Platform.prototype.draw = function(){
+
+	this.x -= 5
+	
+	if (this.x < -100) {
+		this.x = canvas.width + 100
+		this.y = Math.random() * (canvas.height - 200) + 100
+	}
+	
+	if (this.y-25 < ball.y && ball.y < this.y+25 && 
+		this.x-125 < ball.x && ball.x < this.x){
+		if (ball.hit + 0.5 < new Date() / 1000){
+			lives = Math.floor(lives / 2)
+			lives -= 1
+		}
+		ball.hit = new Date() / 1000;
+	}
+	if (this.x-100 < ball.x && ball.x < this.x+100){
+		if (this.y-50 < ball.y && ball.y < this.y) {
+			ball.y = this.y-50
+			if (ball.got[this.i] + 1 < new Date() / 1000){
+				lives += 1
+				ball.got[this.i] = new Date() / 1000
+			}
+		} else if (this.y < ball.y && ball.y < this.y+50) {
+			ball.y = this.y+50
+			if (ball.got[this.i] + 1 < new Date() / 1000){
+				lives += 1
+				ball.got[this.i] = new Date() / 1000
+			}
+		}
+	}
+	
+	ctx.fillStyle = "#BADA55"
+	ctx.fillRect(this.x-100, this.y-25, 200, 50)
+}
+
+Ball = function(){
+	this.x = canvas.width/2
+	this.y = canvas.height/2
+	this.gravity = 5
+	this.hit = 0
+	this.got = [0, 0, 0, 0, 0]
+}
+
+Ball.prototype.draw = function(){
+	
+	if (this.gravity < 0){
+		if (this.y > 75){
+			this.y += this.gravity
+		}
+	} else if (this.gravity > 0) {
+		if (this.y < (canvas.height - 75)) {
+			this.y += this.gravity
+		}
+	}
+	
+	if (this.y < 75) {
+		this.y = 75
+	} else if (this.y > canvas.width - 75) {
+		this.y = canvas.width - 75
+	}
+
+	ctx.fillStyle = "#BADA55"
+	ctx.beginPath();
+	ctx.arc(this.x, this.y, 25, 0, 2*Math.PI);
+	ctx.fill();
+}
+
+Ender = function(){
+	this.x = canvas.width
+	this.start = new Date() / 1000
+}
+
+Ender.prototype.draw = function(){
+	if (new Date() / 1000 > 30 + this.start){
+		this.x -= 1
+		ctx.fillStyle = "#D854B9"
+		ctx.fillRect(this.x, 0, 50, canvas.height)
+	}
+	return (this.x <= ball.x)
+
+}
+
+ball = new Ball();
+ender = new Ender();
+platform = []
+for (i=0; i<5; i++){
+	platform.push(new Platform(i)); 
+}
+
+
+
+loop = function(){
+	ctx.fillStyle = "#7355D9";
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+	ctx.fillStyle = "#BADA55";
+	ctx.fillRect(0, 0, canvas.width, 50);
+	ctx.fillRect(0, canvas.height-50, canvas.width, canvas.height)
+	ctx.fillStyle = "#7355D9"
+	ctx.font = "50px Arial"
+	ctx.fillText(lives, 0, 50)
+	ball.draw()
+	done = ender.draw()
+	for (i=0; i<5; i++){
+		platform[i].draw()
+	}
+	if (lives > 0 && !(done)){
+		setTimeout(loop, 30)
+	} else {
+		ctx.fillStyle = "#7355D9"
+		ctx.fillText(lives, 0, 50)
+	}
+}
+
+setTimeout(loop, 30)
+
+document.onkeydown = function(event){
+	if (event.which == 38) {
+		ball.gravity = -5;
+	} else if (event.which == 40) {
+		ball.gravity = 5;
+	}
+}
+
+</script>
+</body>
+</html>
