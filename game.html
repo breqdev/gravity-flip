@@ -18,8 +18,14 @@ canvas.width = document.body.clientWidth;
 canvas.height = document.body.clientHeight;
 ctx = canvas.getContext("2d");
 
+twentyfive = 25/700 * canvas.height;
+fifty = 2*twentyfive
+seventyfive = 3*twentyfive
+hundred = 2*fifty
+
+
 Platform = function(i){
-	this.x = canvas.width + 100 + Math.random() * canvas.width
+	this.x = canvas.width + hundred + Math.random() * canvas.width
 	this.y = Math.random() * canvas.height
 	this.i = i
 }
@@ -30,28 +36,28 @@ Platform.prototype.draw = function(){
 
 	this.x -= 5
 	
-	if (this.x < -100) {
-		this.x = canvas.width + 100
-		this.y = Math.random() * (canvas.height - 200) + 100
+	if (this.x < -hundred) {
+		this.x = canvas.width + hundred
+		this.y = Math.random() * (canvas.height - 200) + 100 //Can't be too close to top or bottom.
 	}
 	
-	if (this.y-25 < ball.y && ball.y < this.y+25 && 
-		this.x-125 < ball.x && ball.x < this.x){
+	if (this.y-twentyfive < ball.y && ball.y < this.y+twentyfive && 
+		this.x-(hundred+twentyfive) < ball.x && ball.x < this.x){
 		if (ball.hit + 0.5 < new Date() / 1000){
 			lives = Math.floor(lives / 2)
 			lives -= 1
 		}
 		ball.hit = new Date() / 1000;
 	}
-	if (this.x-100 < ball.x && ball.x < this.x+100){
-		if (this.y-50 < ball.y && ball.y < this.y) {
-			ball.y = this.y-50
+	if (this.x-hundred < ball.x && ball.x < this.x+hundred){
+		if (this.y-fifty < ball.y && ball.y < this.y) {
+			ball.y = this.y-fifty
 			if (ball.got[this.i] + 1 < new Date() / 1000){
 				lives += 1
 				ball.got[this.i] = new Date() / 1000
 			}
-		} else if (this.y < ball.y && ball.y < this.y+50) {
-			ball.y = this.y+50
+		} else if (this.y < ball.y && ball.y < this.y+fifty) {
+			ball.y = this.y+fifty
 			if (ball.got[this.i] + 1 < new Date() / 1000){
 				lives += 1
 				ball.got[this.i] = new Date() / 1000
@@ -74,24 +80,24 @@ Ball = function(){
 Ball.prototype.draw = function(){
 	
 	if (this.gravity < 0){
-		if (this.y > 75){
+		if (this.y > seventyfive){
 			this.y += this.gravity
 		}
 	} else if (this.gravity > 0) {
-		if (this.y < (canvas.height - 75)) {
+		if (this.y < (canvas.height - seventyfive)) {
 			this.y += this.gravity
 		}
 	}
 	
-	if (this.y < 75) {
-		this.y = 75
-	} else if (this.y > canvas.width - 75) {
-		this.y = canvas.width - 75
+	if (this.y < seventyfive) {
+		this.y = seventyfive
+	} else if (this.y > canvas.width - seventyfive) {
+		this.y = canvas.width - seventyfive
 	}
 
 	ctx.fillStyle = "#BADA55"
 	ctx.beginPath();
-	ctx.arc(this.x, this.y, 25, 0, 2*Math.PI);
+	ctx.arc(this.x, this.y, twentyfive, 0, 2*Math.PI);
 	ctx.fill();
 }
 
@@ -104,7 +110,7 @@ Ender.prototype.draw = function(){
 	if (new Date() / 1000 > 30 + this.start){
 		this.x -= 1
 		ctx.fillStyle = "#D854B9"
-		ctx.fillRect(this.x, 0, 50, canvas.height)
+		ctx.fillRect(this.x, 0, twentyfive, canvas.height)
 	}
 	return (this.x <= ball.x)
 
@@ -123,11 +129,11 @@ loop = function(){
 	ctx.fillStyle = "#7355D9";
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	ctx.fillStyle = "#BADA55";
-	ctx.fillRect(0, 0, canvas.width, 50);
-	ctx.fillRect(0, canvas.height-50, canvas.width, canvas.height)
+	ctx.fillRect(0, 0, canvas.width, fifty);
+	ctx.fillRect(0, canvas.height-fifty, canvas.width, canvas.height)
 	ctx.fillStyle = "#7355D9"
-	ctx.font = "50px Arial"
-	ctx.fillText(lives, 0, 50)
+	ctx.font = fifty+"px Arial"
+	ctx.fillText(lives, 0, fifty)
 	ball.draw()
 	done = ender.draw()
 	for (i=0; i<5; i++){
@@ -137,7 +143,7 @@ loop = function(){
 		setTimeout(loop, 30)
 	} else {
 		ctx.fillStyle = "#7355D9"
-		ctx.fillText(lives, 0, 50)
+		ctx.fillText(lives, 0, fifty)
 	}
 }
 
