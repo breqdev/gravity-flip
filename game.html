@@ -19,10 +19,10 @@ canvas.height = document.body.clientHeight;
 ctx = canvas.getContext("2d");
 
 twentyfive = 25/700 * canvas.height;
-fifty = 2*twentyfive
-seventyfive = 3*twentyfive
-hundred = 2*fifty
-
+fifty = 2*twentyfive;
+seventyfive = 3*twentyfive;
+hundred = 2*fifty;
+unit = 1/1000 * canvas.width;
 
 Platform = function(i){
 	this.x = canvas.width + hundred + Math.random() * canvas.width
@@ -34,11 +34,11 @@ lives = 10
 
 Platform.prototype.draw = function(){
 
-	this.x -= 5
+	this.x -= unit*5
 	
 	if (this.x < -hundred) {
 		this.x = canvas.width + hundred
-		this.y = Math.random() * (canvas.height - 200) + 100 //Can't be too close to top or bottom.
+		this.y = Math.random() * (canvas.height - 2*hundred) + hundred //Can't be too close to top or bottom.
 	}
 	
 	if (this.y-twentyfive < ball.y && ball.y < this.y+twentyfive && 
@@ -72,7 +72,7 @@ Platform.prototype.draw = function(){
 Ball = function(){
 	this.x = canvas.width/2
 	this.y = canvas.height/2
-	this.gravity = 5
+	this.gravity = 5*unit
 	this.hit = 0
 	this.got = [0, 0, 0, 0, 0]
 }
@@ -150,11 +150,7 @@ loop = function(){
 setTimeout(loop, 30)
 
 document.onkeydown = function(event){
-	if (event.which == 38) {
-		ball.gravity = -5;
-	} else if (event.which == 40) {
-		ball.gravity = 5;
-	}
+	ball.gravity = -ball.gravity;
 }
 
 </script>
