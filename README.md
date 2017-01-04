@@ -1,9 +1,7 @@
 # gravity-flip
 A platformer game where you can flip gravity.  
 
-Controls:  
-* Press Down for normal gravity.
-* Press Up for reverse gravity.  
+Press any key to reverse your current gravity.
 
 Earn points by colliding with the top/bottom of each platform.  
 Lose points by colliding with the left/front side of each platform. You will lose half your points, plus one.  
