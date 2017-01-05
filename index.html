@@ -13,6 +13,7 @@
 <canvas id="canvas" style="position: absolute; overflow: hidden">
 please update your browser.</canvas>
 <script>
+document.onload = function(){
 canvas = document.getElementById("canvas");
 canvas.width = document.body.clientWidth;
 canvas.height = document.body.clientHeight;
@@ -153,6 +154,7 @@ document.onkeydown = function(event){
 	ball.gravity = -ball.gravity;
 }
 
+}
 </script>
 </body>
 </html>
