@@ -130,7 +130,7 @@ for (i=0; i<5; i++){
 
 
 loop = function(){
-	running = True
+	running = true
 	while (True){
 		ctx.fillStyle = "#00F";
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -146,7 +146,7 @@ loop = function(){
 			platform[i].draw()
 		}
 		if (lives > 0 && !(done)){
-			running = False
+			running = false
 			return
 		} else {
 			ctx.fillStyle = "#00F"
