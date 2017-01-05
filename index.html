@@ -69,10 +69,7 @@ Platform.prototype.draw = function(){
 	ctx.fillStyle = "#0F0"
 	ctx.fillRect(this.x-hundred, this.y-twentyfive, 2*hundred, fifty)
 	ctx.fillStyle = "#F00"
-	ctx.beginPath();
-	ctx.moveTo(this.x-hundred, this.y-twentyfive);
-	ctx.lineTo(this.x-hundred, this.y+twentyfive);
-	ctx.stroke();
+	ctx.fillRect(this.x-hundred, this.y-twentyfive, this.x-hundred, this.y);
 }
 
 Ball = function(){
