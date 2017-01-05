@@ -68,6 +68,10 @@ Platform.prototype.draw = function(){
 	
 	ctx.fillStyle = "#0F0"
 	ctx.fillRect(this.x-hundred, this.y-twentyfive, 2*hundred, fifty)
+	ctx.fillStyle = "#F00"
+	ctx.beginPath();
+	ctx.moveTo(this.x-hundred, this.y-twentyfive);
+	ctx.lineTo(this.x-hundred, this.y+twentyfive);
 }
 
 Ball = function(){
@@ -110,7 +114,7 @@ Ender = function(){
 Ender.prototype.draw = function(){
 	if (new Date() / 1000 > 30 + this.start){
 		this.x -= 1
-		ctx.fillStyle = "#F00"
+		ctx.fillStyle = "#F0F"
 		ctx.fillRect(this.x, 0, twentyfive, canvas.height)
 	}
 	return (this.x <= ball.x)
