@@ -131,27 +131,25 @@ for (i=0; i<5; i++){
 
 loop = function(){
 	running = true
-	while (true){
-		ctx.fillStyle = "#00F";
-		ctx.fillRect(0, 0, canvas.width, canvas.height);
-		ctx.fillStyle = "#0F0";
-		ctx.fillRect(0, 0, canvas.width, fifty);
-		ctx.fillRect(0, canvas.height-fifty, canvas.width, canvas.height)
+	ctx.fillStyle = "#00F";
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+	ctx.fillStyle = "#0F0";
+	ctx.fillRect(0, 0, canvas.width, fifty);
+	ctx.fillRect(0, canvas.height-fifty, canvas.width, canvas.height)
+	ctx.fillStyle = "#00F"
+	ctx.font = fifty+"px Arial"
+	ctx.fillText(lives, 0, fifty)
+	ball.draw()
+	done = ender.draw()
+	for (i=0; i<5; i++){
+		platform[i].draw()
+	}
+	if (lives > 0 && !(done)){
 		ctx.fillStyle = "#00F"
-		ctx.font = fifty+"px Arial"
 		ctx.fillText(lives, 0, fifty)
-		ball.draw()
-		done = ender.draw()
-		for (i=0; i<5; i++){
-			platform[i].draw()
-		}
-		if (lives > 0 && !(done)){
-			ctx.fillStyle = "#00F"
-			ctx.fillText(lives, 0, fifty)
-		} else {
-			running = false
-			return
-		}
+		setTimeout(loop, 30)
+	} else {
+		running = false
 	}
 }
 loop();
