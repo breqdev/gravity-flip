@@ -154,9 +154,9 @@ loop = function(){
 setTimeout(loop, 30)
 
 document.onkeydown = function(event){
-	if (event.key == 32){
+	if (event.which == 32){
 		ball.gravity = -ball.gravity;
-	} else if (event.key == 38){
+	} else if (event.which == 38){
 		ball.gravity = -ball.gravity;
 		setTimeout(function(){
 			ball.gravity = -ball.gravity;
