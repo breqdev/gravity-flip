@@ -69,7 +69,8 @@ Platform.prototype.draw = function(){
 	ctx.fillStyle = "#0F0"
 	ctx.fillRect(this.x-hundred, this.y-twentyfive, 2*hundred, fifty)
 	ctx.fillStyle = "#F00"
-	ctx.fillRect(this.x-hundred, this.y-twentyfive, twentyfive, fifty);
+	ten = hundred/10
+	ctx.fillRect(this.x-hundred, this.y-twentyfive+ten, twentyfive, ten*3);
 }
 
 Ball = function(){
