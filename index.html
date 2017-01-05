@@ -146,11 +146,11 @@ loop = function(){
 			platform[i].draw()
 		}
 		if (lives > 0 && !(done)){
-			running = false
-			return
-		} else {
 			ctx.fillStyle = "#00F"
 			ctx.fillText(lives, 0, fifty)
+		} else {
+			running = false
+			return
 		}
 	}
 }
