@@ -18,12 +18,14 @@ canvas = document.getElementById("canvas");
 canvas.width = document.body.clientWidth;
 canvas.height = document.body.clientHeight;
 ctx = canvas.getContext("2d");
-
+	
 twentyfive = 25/700 * canvas.height;
 fifty = 2*twentyfive;
 seventyfive = 3*twentyfive;
 hundred = 2*fifty;
 unit = 1/1000 * canvas.width;
+	
+ctx.font = fifty+"px Arial"
 
 Platform = function(i){
 	this.x = canvas.width + hundred + Math.random() * canvas.width
