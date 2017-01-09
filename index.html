@@ -186,6 +186,7 @@ document.onkeydown = function(event){
 		loop();
 	} else if (event.which == 37){
 		ball.speed = -ball.speed
+		lives -= 1
 		setTimeout(function(){
 			ball.speed = -ball.speed
 		}, 500)
