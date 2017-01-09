@@ -153,7 +153,17 @@ loop = function(){
 		running = false
 	}
 }
-loop();
+
+ctx.fillText("welcome to gravity flip", 0, fifty)
+ctx.fillText("press space to flip gravity", 0, hundred)
+ctx.fillText("press shift to jump", 0, fifty*3)
+ctx.fillText("press ← to reverse motion", 0, hundred*2)
+ctx.fillText("avoid the front of platforms", 0, fifty*5)
+ctx.fillText("collide with the top/bottom of platforms to earn points", 0, hundred*3)
+ctx.fillText("press r to start", 0, fifty*7)
+
+//loop();
+running = false;
 document.onkeydown = function(event){
 	if (event.which == 32){
 		ball.gravity = -ball.gravity;
