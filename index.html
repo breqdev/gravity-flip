@@ -35,7 +35,7 @@ lives = 10
 
 Platform.prototype.draw = function(){
 
-	this.x -= unit*5
+	this.x += ball.speed
 	
 	if (this.x < -hundred) {
 		this.x = canvas.width + hundred
@@ -79,6 +79,7 @@ Ball = function(){
 	this.gravity = 5*unit
 	this.hit = 0
 	this.got = [0, 0, 0, 0, 0]
+	this.speed = -5*unit
 }
 
 Ball.prototype.draw = function(){
@@ -163,6 +164,8 @@ document.onkeydown = function(event){
 		}, 500)
 	} else if (event.which == 82 && !running){
 		loop();
+	} else if (event.which == 37){
+		ball.speed = -ball.speed
 	}
 }
 
