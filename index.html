@@ -163,6 +163,13 @@ document.onkeydown = function(event){
 			ball.gravity = -ball.gravity;
 		}, 500)
 	} else if (event.which == 82 && !running){
+		ball = new Ball();
+		ender = new Ender();
+		platform = []
+		for (i=0; i<5; i++){
+			platform.push(new Platform(i)); 
+		}
+		lives = 10
 		loop();
 	} else if (event.which == 37){
 		ball.speed = -ball.speed
