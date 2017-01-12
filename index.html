@@ -49,7 +49,7 @@ Platform.prototype.draw = function(){
 		this.x-(hundred+twentyfive) < ball.x && ball.x < this.x){
 		if (ball.hit + 0.5 < new Date() / 1000){
 			//lives = Math.floor(lives / 2) // For exponential penalties
-			lives -= 1
+			lives -= 2
 		}
 		ball.hit = new Date() / 1000;
 	}
