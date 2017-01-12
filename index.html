@@ -36,6 +36,7 @@ Platform = function(i){
 
 lives = 10
 
+
 Platform.prototype.draw = function(){
 
 	this.x += ball.speed
@@ -50,6 +51,8 @@ Platform.prototype.draw = function(){
 		if (ball.hit + 0.5 < new Date() / 1000){
 			//lives = Math.floor(lives / 2) // For exponential penalties
 			lives -= 2
+			ctx.fillStyle = "#F00"
+			ctx.fillRect(0, 0, canvas.width, canvas.height)
 		}
 		ball.hit = new Date() / 1000;
 	}
@@ -58,12 +61,16 @@ Platform.prototype.draw = function(){
 			ball.y = this.y-fifty
 			if (ball.got[this.i] + 1 < new Date() / 1000){
 				lives += 1
+				ctx.fillStyle = "#0F0"
+				ctx.fillRect(0, 0, canvas.width, canvas.height)
 				ball.got[this.i] = new Date() / 1000
 			}
 		} else if (this.y < ball.y && ball.y < this.y+fifty) {
 			ball.y = this.y+fifty
 			if (ball.got[this.i] + 1 < new Date() / 1000){
 				lives += 1
+				ctx.fillStyle = "#0F0"
+				ctx.fillRect(0, 0, canvas.width, canvas.height)
 				ball.got[this.i] = new Date() / 1000
 			}
 		}
