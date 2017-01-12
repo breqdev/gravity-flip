@@ -204,7 +204,18 @@ document.onkeydown = function(event){
 }
 
 document.onmousedown = function(event){
-	ball.gravity = -ball.gravity;
+	if (running){
+		ball.gravity = -ball.gravity;
+	} else {
+		ball = new Ball();
+		ender = new Ender();
+		platform = []
+		for (i=0; i<5; i++){
+			platform.push(new Platform(i)); 
+		}
+		lives = 10
+		loop();
+	}
 }
 }
 </script>
