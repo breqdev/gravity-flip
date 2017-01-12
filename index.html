@@ -48,7 +48,7 @@ Platform.prototype.draw = function(){
 	if (this.y-twentyfive < ball.y && ball.y < this.y+twentyfive && 
 		this.x-(hundred+twentyfive) < ball.x && ball.x < this.x){
 		if (ball.hit + 0.5 < new Date() / 1000){
-			lives = Math.floor(lives / 2)
+			//lives = Math.floor(lives / 2) // For exponential penalties
 			lives -= 1
 		}
 		ball.hit = new Date() / 1000;
@@ -186,7 +186,7 @@ document.onkeydown = function(event){
 		loop();
 	} else if (event.which == 37){
 		ball.speed = -ball.speed
-		lives -= 1
+		//lives -= 1
 		setTimeout(function(){
 			ball.speed = -ball.speed
 		}, 500)
